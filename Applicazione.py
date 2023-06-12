@@ -22,7 +22,7 @@ def login():
   mydb = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="Arcobaleno1",
+        password="Test1234",
         database="mydatabase"
     )
   mycursor = mydb.cursor()
@@ -62,8 +62,22 @@ def success(name):
 @app.route('/categoria',methods = ['POST', 'GET'])
 def categoria():
     categories = {}
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Test1234",
+        database="mydatabase"
+    )
+
+    mycursor = mydb.cursor()
+
+    mycursor.execute("SELECT * FROM zalando")
+    lista = []
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        lista.append(x)
     for articolo in lista:
-        tipologia = articolo.tipologia
+        tipologia = articolo[1]
         if tipologia in categories:
             categories[tipologia] += 1
         else:
